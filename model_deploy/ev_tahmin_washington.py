@@ -7,15 +7,7 @@ pip install numpy
 import pandas as pd
 
 import numpy as np
-import pandas as pd
-
-# Github'dan dosyayı çekmek için raw url'yi kullan
-url = "/washington-ev-fiyat-tahmini-uygulamas-/model_deploy/data.csv
-"
-df = pd.read_csv(url)
-pip install scikit-learn
-
-streamlit run model_deploy/ev_tahmin_washington.py
+df=pd.read_csv(r"C:\Users\eren\Desktop\makine sadi evren sc\archive_3\data.csv")
 
 import sys
 df.drop(["date","country","statezip","street"],axis=1,inplace=True)
@@ -219,25 +211,53 @@ for city, model in best_params_by_city.items():
 
 
 
-import os
-import pandas as pd
 
-# Şu anki çalışma dizinini kontrol et
-current_directory = os.getcwd()
-print("Çalışma dizini:", current_directory)
+import streamlit as st
+import numpy as np
+import joblib  # Modelinizi yüklemek için
 
-# Dosya yolunu oluştur
-file_path = os.path.join(current_directory, "data", "data.csv")
+# Kullanıcıya hangi modeli kullanacağı sorulacak
+model_secimi = st.sidebar.selectbox("Kullanmak İstediğiniz Modeli Seçin", ["Model 1", "Model 2", "Model 3"])
 
-# Dosya var mı kontrol et
-if os.path.exists(file_path):
-    print("Dosya bulundu:", file_path)
-    df = pd.read_csv(file_path)
-else:
-    raise FileNotFoundError(f"Dosya bulunamadı: {file_path}")
+# Modeli yükleme (seçilen modele göre)
+if model_secimi == "Model 1":
+    model = joblib.load('model_1.pkl')
+elif model_secimi == "Model 2":
+    model = joblib.load('model_2.pkl')
+elif model_secimi == "Model 3":
+    model = joblib.load('model_3.pkl')
 
-# Veri çerçevesini yazdır (örnek)
-print(df.head())
+# Şehir listesi
+sehirler = ['Washington', 'New York', 'Los Angeles', 'Chicago', 'Miami']
+
+# Kullanıcıdan girdileri alma
+st.sidebar.header("Ev Özelliklerini Girin")
+
+# Örnek girdiler
+metrekare = st.sidebar.number_input("Metrekare (m²)", min_value=50, max_value=500, value=100)
+oda_sayisi = st.sidebar.number_input("Oda Sayısı", min_value=1, max_value=10, value=3)
+bina_yasi = st.sidebar.number_input("Bina Yaşı", min_value=0, max_value=100, value=10)
+
+# Şehir seçimi
+sehir = st.sidebar.selectbox("Şehir", sehirler)
+
+# Şehri sayısal değere dönüştürme
+sehir_mapping = {sehir: idx for idx, sehir in enumerate(sehirler)}
+sehir_encoded = sehir_mapping[sehir]
+
+# Tahmin yapma butonu
+if st.sidebar.button("Tahmin Yap"):
+    # Kullanıcı girdilerini modele uygun formata dönüştürme
+    input_data = np.array([[metrekare, oda_sayisi, bina_yasi, sehir_encoded]])
+    
+    # Tahmin yapma
+    tahmin = model.predict(input_data)
+    
+    # Sonucu ekrana yazdırma
+    st.success(f"Tahmini Ev Fiyatı: {tahmin[0]:.2f} TL")
+
+
+
 
 
 
