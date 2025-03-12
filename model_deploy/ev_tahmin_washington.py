@@ -1,3 +1,9 @@
+pip install scikit-learn
+pip install pandas
+pip install numpy
+
+
+
 import pandas as pd
 
 import numpy as np
