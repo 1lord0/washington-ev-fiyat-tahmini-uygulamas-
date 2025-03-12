@@ -4,7 +4,8 @@ import numpy as np
 import pandas as pd
 
 # Github'dan dosyayı çekmek için raw url'yi kullan
-url = "model_deploy/data.csv"
+url = "/washington-ev-fiyat-tahmini-uygulamas-/model_deploy/data.csv
+"
 df = pd.read_csv(url)
 import sys
 df.drop(["date","country","statezip","street"],axis=1,inplace=True)
