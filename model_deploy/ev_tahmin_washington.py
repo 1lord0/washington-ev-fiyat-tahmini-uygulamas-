@@ -1,6 +1,3 @@
-pip install scikit-learn
-pip install pandas
-pip install numpy
 
 
 
@@ -36,15 +33,6 @@ df=df.drop(["yr_built","yr_renovated"],axis=1)
 df['price'] = df['price'].apply(lambda x: int(float(x)))
 
 df=df[~(df["city"]=="Kent")]
-
-
-
-
-
-
-
-
-
 
 from sklearn.model_selection import train_test_split
 #gridsearch ile hangi şehre hangi parametreleri seçmeliyiz bunu bir sözlüğe aktarıyoruz
