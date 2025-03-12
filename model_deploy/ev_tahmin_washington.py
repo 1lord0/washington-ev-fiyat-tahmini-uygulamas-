@@ -45,7 +45,7 @@ from sklearn.linear_model import ElasticNet
 
 
 df = df[~df['city'].isin(df['city'].value_counts()[df['city'].value_counts() < 100].index)]
-
+best_param_city=[]
 best_params_city = {
     'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
     'Seattle': {'alpha': 0.0001, 'l1_ratio': 1.0},
