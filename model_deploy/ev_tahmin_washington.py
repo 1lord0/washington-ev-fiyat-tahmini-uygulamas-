@@ -15,6 +15,7 @@ url = "/washington-ev-fiyat-tahmini-uygulamas-/model_deploy/data.csv
 df = pd.read_csv(url)
 pip install scikit-learn
 
+streamlit run model_deploy/ev_tahmin_washington.py
 
 import sys
 df.drop(["date","country","statezip","street"],axis=1,inplace=True)
