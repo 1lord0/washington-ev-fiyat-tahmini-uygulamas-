@@ -205,15 +205,25 @@ for city, model in best_params_by_city.items():
 
 
 
+import os
 import pandas as pd
 
-# GitHub RAW URL
-url = "https://github.com/1lord0/washington-ev-fiyat-tahmini-uygulamas-/blob/main/model_deploy/data.csv"
+# Şu anki çalışma dizinini kontrol et
+current_directory = os.getcwd()
+print("Çalışma dizini:", current_directory)
 
-# Veriyi oku
-df = pd.read_csv(url)
+# Dosya yolunu oluştur
+file_path = os.path.join(current_directory, "data", "data.csv")
 
+# Dosya var mı kontrol et
+if os.path.exists(file_path):
+    print("Dosya bulundu:", file_path)
+    df = pd.read_csv(file_path)
+else:
+    raise FileNotFoundError(f"Dosya bulunamadı: {file_path}")
 
+# Veri çerçevesini yazdır (örnek)
+print(df.head())
 
 
 
