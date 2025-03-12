@@ -4,7 +4,10 @@
 import pandas as pd
 
 import numpy as np
-df=pd.read_csv(r"C:\Users\eren\Desktop\makine sadi evren sc\archive_3\data.csv")
+
+
+df = pd.read_csv('data/data.csv')  # dosya projenin içinde olmalı
+
 
 import sys
 df.drop(["date","country","statezip","street"],axis=1,inplace=True)
