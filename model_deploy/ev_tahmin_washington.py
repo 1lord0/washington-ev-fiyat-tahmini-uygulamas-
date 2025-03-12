@@ -128,49 +128,46 @@ import os
 
 
 
-
 import streamlit as st
+import joblib
 import numpy as np
-import joblib  # Modelinizi yüklemek için
-model1=model_deploy/woodinville_model.pkl
-# Kullanıcıya hangi modeli kullanacağı sorulacak
-model_secimi = st.sidebar.selectbox("Kullanmak İstediğiniz Modeli Seçin", ["Model 1", "Model 2", "Model 3"])
 
-# Modeli yükleme (seçilen modele göre)
-if model_secimi == "Model 1":
-    model = joblib.load('model_1.pkl')
-elif model_secimi == "Model 2":
-    model = joblib.load('model_2.pkl')
-elif model_secimi == "Model 3":
-    model = joblib.load('model_3.pkl')
+# Model dosya yolları
+model_paths = {
+    "Seattle": 'model_deploy/seattle_model.pkl',
+    "Renton": 'model_deploy/renton_model.pkl',
+    "Bellevue": 'C:\\Users\\eren\\Desktop\\model_deploy\\bellevue_model.pkl',
+    "Shoreline": 'model_deploy/shoreline_model.pkl',
+    "Woodinville": 'model_deploy/woodinville_model.pkl'
+}
 
-# Şehir listesi
-sehirler = ['Washington', 'New York', 'Los Angeles', 'Chicago', 'Miami']
+# Streamlit başlık ve açıklama
+st.title("🏠 Ev Fiyat Tahmin Uygulaması")
+st.write("Bu uygulama, Elastic Net modeli kullanarak ev fiyatlarını tahmin eder.")
 
-# Kullanıcıdan girdileri alma
+# Kullanıcıdan girdiler alma
 st.sidebar.header("Ev Özelliklerini Girin")
 
-# Örnek girdiler
 metrekare = st.sidebar.number_input("Metrekare (m²)", min_value=50, max_value=500, value=100)
 oda_sayisi = st.sidebar.number_input("Oda Sayısı", min_value=1, max_value=10, value=3)
 bina_yasi = st.sidebar.number_input("Bina Yaşı", min_value=0, max_value=100, value=10)
 
 # Şehir seçimi
+sehirler = list(model_paths.keys())  # Model dosyalarıyla eşleşen şehirler
 sehir = st.sidebar.selectbox("Şehir", sehirler)
 
-# Şehri sayısal değere dönüştürme
-sehir_mapping = {sehir: idx for idx, sehir in enumerate(sehirler)}
-sehir_encoded = sehir_mapping[sehir]
+# Seçilen şehre göre model yükleme
+if sehir:
+    model = joblib.load(model_paths[sehir])
 
-# Tahmin yapma butonu
+# Kullanıcıdan girdileri alıp modele uygun formata dönüştürme
 if st.sidebar.button("Tahmin Yap"):
-    # Kullanıcı girdilerini modele uygun formata dönüştürme
-    input_data = np.array([[metrekare, oda_sayisi, bina_yasi, sehir_encoded]])
-    
-    # Tahmin yapma
+    input_data = np.array([[metrekare, oda_sayisi, bina_yasi]])
+
+    # Modeli kullanarak tahmin yapma
     tahmin = model.predict(input_data)
-    
-    # Sonucu ekrana yazdırma
+
+    # Sonucu ekranda gösterme
     st.success(f"Tahmini Ev Fiyatı: {tahmin[0]:.2f} TL")
 
 
@@ -196,65 +193,6 @@ if st.sidebar.button("Tahmin Yap"):
 
 
 
-
-
-
-
-"""
-
-
-
-
-
-# Streamlit uygulamasının başlığı
-st.title("🏠 Ev Fiyat Tahmin Uygulaması")
-st.write("Bu uygulama, Elastic Net modeli kullanarak ev fiyatlarını tahmin eder.")
-
-# Modeli yükleme
-model = joblib.load('C:\\Users\\eren\\Desktop\\model_deploy\\ev_fiyat_modeli.pkl    ')
-
-# Şehir listesi (veri setinizdeki şehirler)
-sehirler = [
-    "Seattle", "Renton", "Bellevue", "Redmond", "Issaquah", "Kirkland", "Kent", 
-    "Auburn", "Sammamish", "Federal Way", ""Shoreline", "Woodinville"
-]
-
-
-
-"if sehir == "Seattle":
-    model = joblib.load('C:\\Users\\eren\\Desktop\\model_deploy\\seattle_model.pkl')
-elif sehir == "Renton":
-    model = joblib.load('C:\\Users\\eren\\Desktop\\model_deploy\\renton_model.pkl')
-elif sehir == "Bellevue":
-    model = joblib.load('C:\\Users\\eren\\Desktop\\model_deploy\\bellevue_model.pkl')
-
-
-# Kullanıcıdan girdileri alma
-st.sidebar.header("Ev Özelliklerini Girin")
-
-# Örnek girdiler
-metrekare = st.sidebar.number_input("Metrekare (m²)", min_value=50, max_value=500, value=100)
-oda_sayisi = st.sidebar.number_input("Oda Sayısı", min_value=1, max_value=10, value=3)
-bina_yasi = st.sidebar.number_input("Bina Yaşı", min_value=0, max_value=100, value=10)
-
-# Şehir seçimi
-sehir = st.sidebar.selectbox("Şehir", sehirler)
-
-# Şehri sayısal değere dönüştürme
-sehir_mapping = {sehir: idx for idx, sehir in enumerate(sehirler)}
-sehir_encoded = sehir_mapping[sehir]
-
-# Tahmin yapma butonu
-if st.sidebar.button("Tahmin Yap"):
-    # Kullanıcı girdilerini modele uygun formata dönüştürme
-    input_data = np.array([[metrekare, oda_sayisi, bina_yasi, sehir_encoded]])
-    
-    # Tahmin yapma
-    tahmin = model.predict(input_data)
-    
-    # Sonucu ekrana yazdırma
-    st.success(f"Tahmini Ev Fiyatı: {tahmin[0]:.2f} TL")""
-"""
 
 
 
