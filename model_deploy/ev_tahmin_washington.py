@@ -55,61 +55,21 @@ from sklearn.linear_model import ElasticNet
 
 df = df[~df['city'].isin(df['city'].value_counts()[df['city'].value_counts() < 100].index)]
 
-
-[ df.drop(i,axis=0,inplace=True) for i in df['city'].value_counts() if i<100 ]
-
-from sklearn.model_selection import GridSearchCV
-from sklearn.linear_model import ElasticNet
-
-best_params_by_city = {}
-
-for city in df['city'].unique():
-    df_city = df[df['city'] == city]
-    n_samples = len(df_city)  # O şehirdeki veri sayısı
-
-    if n_samples < 2:
-        print(f"Yetersiz veri nedeniyle {city} atlandı.")
-        continue  
-
-    print(f"Şehir: {city}")
-
-    X = df_city.drop(columns=['price', 'city'])  
-    y = df_city['price']  
-
-    if n_samples < 10:
-        X_train, y_train = X, y
-        X_test, y_test = X, y
-    else:
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    param_grid = {
-        'alpha': np.logspace(-4, 1, 10),  
-        'l1_ratio': np.linspace(0, 1, 10)  
-    }
-
-    # Veri sayısına göre `cv` değerini ayarla
-    cv_value = min(3, n_samples)  # Örnek sayısından büyük olamaz
-
-    model = ElasticNet()
-    
-    # Eğer veri sayısı 1 ise GridSearch kullanmadan modeli eğit
-    if n_samples == 1:
-        model.fit(X_train, y_train)
-        best_params = {'alpha': model.alpha, 'l1_ratio': model.l1_ratio}
-    else:
-        grid_search = GridSearchCV(model, param_grid, cv=cv_value, scoring='neg_mean_squared_error')
-        grid_search.fit(X_train, y_train)
-        best_params = grid_search.best_params_
-
-    best_params_by_city[city] = best_params
-    print(f"Şehir: {city}, En iyi parametreler: {best_params}")
-
-print("\nTüm şehirler için en iyi parametreler:")
-print(best_params_by_city)
-
-
-
-
+best_params_city={'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
+ 'Seattle': {'alpha': 0.0001, 'l1_ratio': 1.0},
+ 'Bellevue': {'alpha': 0.004641588833612782, 'l1_ratio': 0.5555555555555556},
+ 'Redmond': {'alpha': 0.0001, 'l1_ratio': 1.0},
+ 'Sammamish': {'alpha': 0.7742636826811278, 'l1_ratio': 0.2222222222222222},
+ 'Auburn': {'alpha': 0.7742636826811278, 'l1_ratio': 0.3333333333333333},
+ 'Federal Way': {'alpha': 0.05994842503189409, 'l1_ratio': 0.3333333333333333},
+ 'Kirkland': {'alpha': 0.0001, 'l1_ratio': 1.0},
+ 'Issaquah': {'alpha': 0.0001, 'l1_ratio': 1.0},
+ 'Woodinville': {'alpha': 10.0, 'l1_ratio': 0.0},
+ 'Renton': {'alpha': 0.7742636826811278, 'l1_ratio': 0.1111111111111111},
+ 'Sammamish': {'alpha': 0.7742636826811278, 'l1_ratio': 0.2222222222222222},
+ 'Seattle':{'alpha': 0.0001, 'l1_ratio': 1.0},
+ 'Shoreline':{'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
+  'Woodinville':{'alpha': 10.0, 'l1_ratio': 0.0}}
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
@@ -163,50 +123,16 @@ for city in df['city'].unique():
 
     print(f"{city} için eğitim tamamlandı. MAE: {mae:.2f}, MSE: {mse:.2f}, R²: {r2:.2f}")
 
-# Tahmin sonuçlarını göster
-print("\n📊 Tüm şehirler için tahmin sonuçları:")
-for city, results in predictions_by_city.items():
-    print(f"\n🏙 Şehir: {city}")
-    print(f"📌 Gerçek: {results['Gerçek Değerler'][:5]}")
-    print(f"🔮 Tahmin: {results['Tahminler'][:5]}")
-    print(f"📉 MAE: {results['MAE']:.2f}")
-    print(f"📊 MSE: {results['MSE']:.2f}")
-    print(f"📈 R²: {results['R2']:.2f}")
 
 
 import pickle
-
-
-
-
-
 
 import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
 
-
-
-
-
-
-import joblib
-
-import joblib
-
-import joblib
 import os
-
-# Modellerin kaydedileceği klasörü belirle
-save_dir = "C:\\Users\\eren\\Desktop\\model_deploy"
-os.makedirs(save_dir, exist_ok=True)  # Klasör yoksa oluştur
-
-# Her şehir için modeli kaydet
-for city, model in best_params_by_city.items():
-    file_path = os.path.join(save_dir, f"{city.lower()}_model.pkl")  # Dosya yolunu oluştur
-    joblib.dump(model, file_path)
-    print(f"{file_path} dosyasına kaydedildi!")
 
 
 
@@ -215,7 +141,7 @@ for city, model in best_params_by_city.items():
 import streamlit as st
 import numpy as np
 import joblib  # Modelinizi yüklemek için
-
+model1=model_deploy/woodinville_model.pkl
 # Kullanıcıya hangi modeli kullanacağı sorulacak
 model_secimi = st.sidebar.selectbox("Kullanmak İstediğiniz Modeli Seçin", ["Model 1", "Model 2", "Model 3"])
 
