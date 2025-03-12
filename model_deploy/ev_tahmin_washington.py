@@ -48,18 +48,8 @@ df = df[~df['city'].isin(df['city'].value_counts()[df['city'].value_counts() < 1
 
 best_params_city={'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
  'Seattle': {'alpha': 0.0001, 'l1_ratio': 1.0},
- 'Bellevue': {'alpha': 0.004641588833612782, 'l1_ratio': 0.5555555555555556},
- 'Redmond': {'alpha': 0.0001, 'l1_ratio': 1.0},
- 'Sammamish': {'alpha': 0.7742636826811278, 'l1_ratio': 0.2222222222222222},
- 'Auburn': {'alpha': 0.7742636826811278, 'l1_ratio': 0.3333333333333333},
- 'Federal Way': {'alpha': 0.05994842503189409, 'l1_ratio': 0.3333333333333333},
- 'Kirkland': {'alpha': 0.0001, 'l1_ratio': 1.0},
- 'Issaquah': {'alpha': 0.0001, 'l1_ratio': 1.0},
- 'Woodinville': {'alpha': 10.0, 'l1_ratio': 0.0},
  'Renton': {'alpha': 0.7742636826811278, 'l1_ratio': 0.1111111111111111},
- 'Sammamish': {'alpha': 0.7742636826811278, 'l1_ratio': 0.2222222222222222},
  'Seattle':{'alpha': 0.0001, 'l1_ratio': 1.0},
- 'Shoreline':{'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
   'Woodinville':{'alpha': 10.0, 'l1_ratio': 0.0}}
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
