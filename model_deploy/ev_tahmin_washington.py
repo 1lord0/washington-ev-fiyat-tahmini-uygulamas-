@@ -208,7 +208,7 @@ for city, model in best_params_by_city.items():
 import pandas as pd
 
 # GitHub RAW URL
-url = "https://raw.githubusercontent.com/KULLANICI_ADI/REPO_ADI/BRANCH/data.csv"
+url = "https://github.com/1lord0/washington-ev-fiyat-tahmini-uygulamas-/blob/main/model_deploy/data.csv"
 
 # Veriyi oku
 df = pd.read_csv(url)
