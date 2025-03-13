@@ -74,7 +74,8 @@ model_paths = {
     "Renton": "model_deploy/renton_model.pkl",
     "Woodinville": "model_deploy/woodinville_model.pkl",
     "Federal Way": "model_deploy/federal_way_model.pkl",
-    "Kirkland":"model_deploy/kirkland_model.pkl"
+    "Kirkland":"model_deploy/kirkland_model.pkl",
+    "Issaquah":'model_deploy/issaquah_model.pkl'
 }
 
 st.title("🏠 Ev Fiyat Tahmin Uygulaması")
