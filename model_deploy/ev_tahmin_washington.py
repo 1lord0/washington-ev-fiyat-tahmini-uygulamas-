@@ -73,6 +73,8 @@ model_paths = {
 }
 
 st.title("🏠 Ev Fiyat Tahmin Uygulaması")
+sehir = st.sidebar.selectbox("Şehir Seçiniz", list(model_paths.keys()))
+
 st.write("Elastic Net modeli kullanarak ev fiyatlarını tahmin edin.")
 
 # Kullanıcı girdilerini alıyoruz.
