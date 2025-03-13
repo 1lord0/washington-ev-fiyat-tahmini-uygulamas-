@@ -10,14 +10,14 @@ df = pd.read_csv('model_deploy/yenidata1.csv')  # dosya projenin içinde olmalı
 
 
 
-best_param_city=[]
+
 best_params_city = {
     'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
     'Seattle': {'alpha': 0.0001, 'l1_ratio': 1.0},
     'Renton': {'alpha': 0.7742636826811278, 'l1_ratio': 0.1111111111111111},
     'Woodinville': {'alpha': 10.0, 'l1_ratio': 0.0}
 }
-
+best_param_city=[]
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
