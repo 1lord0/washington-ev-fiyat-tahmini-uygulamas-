@@ -77,10 +77,23 @@ st.write("Elastic Net modeli kullanarak ev fiyatlarını tahmin edin.")
 
 # Kullanıcı girdilerini alıyoruz.
 st.sidebar.header("Ev Özelliklerini Girin")
-sehir = st.sidebar.selectbox("Şehir Seçiniz", list(model_paths.keys()))
-metrekare = st.sidebar.number_input("Metrekare (m²)", min_value=50, max_value=500, value=100)
-oda_sayisi = st.sidebar.number_input("Oda Sayısı", min_value=1, max_value=10, value=3)
-bina_yasi = st.sidebar.number_input("Bina Yaşı", min_value=0, max_value=100, value=10)
+bedrooms = st.sidebar.number_input("Yatak Odası Sayısı", min_value=0, max_value=10, value=3, step=1)
+bathrooms = st.sidebar.number_input("Banyo Sayısı", min_value=0.0, max_value=10.0, value=2.0, step=0.5)
+sqft_living = st.sidebar.number_input("Yaşam Alanı (sqft)", min_value=100, max_value=10000, value=2000)
+sqft_lot = st.sidebar.number_input("Arsa Alanı (sqft)", min_value=500, max_value=50000, value=5000)
+floors = st.sidebar.number_input("Kat Sayısı", min_value=1, max_value=5, value=1)
+waterfront = st.sidebar.selectbox("Su Kenarı mı?", options=["Hayır", "Evet"])
+# Binary dönüşüm: "Evet" için 1, "Hayır" için 0
+waterfront = 1 if waterfront == "Evet" else 0
+
+view = st.sidebar.number_input("Manzara Puanı", min_value=0, max_value=5, value=0, step=1)
+condition = st.sidebar.number_input("Ev Durumu (1-5)", min_value=1, max_value=5, value=3, step=1)
+sqft_above = st.sidebar.number_input("Üst Kat Alanı (sqft)", min_value=100, max_value=10000, value=1500)
+sqft_basement = st.sidebar.number_input("Bodrum Alanı (sqft)", min_value=0, max_value=5000, value=500)
+ev_yenilendi_mi = st.sidebar.selectbox("Ev Yenilendi mi?", options=["Hayır", "Evet"])
+# Binary dönüşüm: "Evet" için 1, "Hayır" için 0
+ev_yenilendi_mi = 1 if ev_yenilendi_mi == "Evet" else 0
+ev_yili = st.sidebar.number_input("Ev Yapım Yılı", min_value=1800, max_value=2025, value=2000, step=1)
 
 # "Tahmin Yap" butonuna basıldığında tahmin işlemi başlıyor.
 if st.sidebar.button("Tahmin Yap"):
