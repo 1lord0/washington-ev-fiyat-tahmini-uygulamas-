@@ -9,42 +9,7 @@ import numpy as np
 df = pd.read_csv('model_deploy/data.csv')  # dosya projenin içinde olmalı
 
 
-import sys
-df.drop(["date","country","statezip","street"],axis=1,inplace=True)
 
-
-df[df["city"]=="Kent"]
-import numpy as np
-df["ev_yenilendi_mi"] = df["yr_renovated"].apply(lambda x: 1 if x > 0 else 0)
-city_counts = df['city'].value_counts()
-  # Şehirdeki veri sayısını hesapla
-low_population_cities = city_counts[city_counts < 100].index  # 100'den az olanları belirle
-df = df[~df['city'].isin(low_population_cities)]  # Bu şehirleri çıkar
-
-print(f"✅ Güncellenmiş veri setinde {df['city'].nunique()} farklı şehir kaldı.")
-
-
-df["ev_yili"]=df.apply(lambda row: row["yr_built"] if row["yr_renovated"]==0  else row["yr_renovated"],axis=1)
-
-
-df=df.drop(["yr_built","yr_renovated"],axis=1)
-
-
-
-
-# 'price' sütunundaki 'e' karakterlerini sayısal değere çevirme
-df['price'] = df['price'].apply(lambda x: int(float(x)))
-
-df=df[~(df["city"]=="Kent")]
-
-from sklearn.model_selection import train_test_split
-#gridsearch ile hangi şehre hangi parametreleri seçmeliyiz bunu bir sözlüğe aktarıyoruz
-from sklearn.model_selection import GridSearchCV
-from sklearn.linear_model import ElasticNet
-
-
-
-df = df[~df['city'].isin(df['city'].value_counts()[df['city'].value_counts() < 100].index)]
 best_param_city=[]
 best_params_city = {
     'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
