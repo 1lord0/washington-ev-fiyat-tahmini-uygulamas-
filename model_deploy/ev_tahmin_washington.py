@@ -11,7 +11,7 @@ url="model_deploy/yenidata1.csv"
 df = pd.read_csv(url)
 
 # Sadece belirli şehirleri seç (örneğin: Shoreline, Seattle, Renton, Woodinville)
-allowed_cities = ['Shoreline', 'Seattle', 'Renton', 'Woodinville','Federal Way','Kirkland','Issaquah'    ]
+allowed_cities = ['Shoreline', 'Seattle', 'Renton', 'Woodinville','Federal Way','Kirkland','Issaquah','Redmond'    ]
 df = df[df["city"].isin(allowed_cities)]
 
 # Her şehir için en iyi parametreler (önceden belirlenmiş)
@@ -75,7 +75,8 @@ model_paths = {
     "Woodinville": "model_deploy/woodinville_model.pkl",
     "Federal Way": "model_deploy/federal_way_model.pkl",
     "Kirkland":"model_deploy/kirkland_model.pkl",
-    "Issaquah":'model_deploy/issaquah_model.pkl'
+    "Issaquah":'model_deploy/issaquah_model.pkl',
+    "Redmond":'model_deploy/redmond_model.pkl'
 }
 
 st.title("🏠 Ev Fiyat Tahmin Uygulaması")
