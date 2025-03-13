@@ -22,7 +22,8 @@ best_params_city = {
     'Woodinville':{'alpha': 10.0, 'l1_ratio': 0.0},
      'Federal Way': {'alpha': 0.05994842503189409, 'l1_ratio': 0.3333333333333333},
      'Kirkland': {'alpha': 0.0001, 'l1_ratio': 1.0},
-    'Issaquah': {'alpha': 0.0001, 'l1_ratio': 1.0}
+    'Issaquah': {'alpha': 0.0001, 'l1_ratio': 1.0},
+    'Redmond': {'alpha': 0.0001, 'l1_ratio': 1.0}
 }
 
 # Model dosyalarının kaydedileceği klasörü oluştur (eğer yoksa)
