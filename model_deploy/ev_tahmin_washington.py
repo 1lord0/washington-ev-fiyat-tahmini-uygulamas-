@@ -23,7 +23,10 @@ best_params_city = {
      'Federal Way': {'alpha': 0.05994842503189409, 'l1_ratio': 0.3333333333333333}
 }
 
-
+# Model dosyalarının kaydedileceği klasörü oluştur (eğer yoksa)
+model_dir = "model_deploy"
+if not os.path.exists(model_dir):
+    os.makedirs(model_dir)
 
 # Her şehir için modeli eğit ve kaydet
 for city in allowed_cities:
