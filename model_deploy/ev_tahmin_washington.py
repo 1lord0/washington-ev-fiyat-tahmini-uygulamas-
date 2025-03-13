@@ -104,7 +104,8 @@ if st.sidebar.button("Tahmin Yap"):
         # Modeli yükle
         model = joblib.load(model_path)
         # Girdi verilerini modele uygun formata getiriyoruz.
-        input_data = np.array([[metrekare, oda_sayisi, bina_yasi]])
+        input_data = np.array([[metrekare, oda_sayisi, ev_yili]])
+
         # Tahmin yap
         tahmin = model.predict(input_data)
         st.success(f"{sehir} için tahmini ev fiyatı: {tahmin[0]:.2f} TL")
