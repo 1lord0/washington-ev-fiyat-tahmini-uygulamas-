@@ -7,7 +7,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
 # Veriyi oku
-df = pd.read_csv("yenidata1.csv")
+url="model_deploy/yenidata1.csv"
+df = pd.read_csv(url)
 
 # Sadece belirli şehirleri seç (örneğin: Shoreline, Seattle, Renton, Woodinville)
 allowed_cities = ['Shoreline', 'Seattle', 'Renton', 'Woodinville']
