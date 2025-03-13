@@ -65,10 +65,6 @@ for city in df['city'].unique():
     df_city = df[df['city'] == city]
     n_samples = len(df_city)
 
-    if city not in best_params_by_city or n_samples < 2:
-        print(f"Yetersiz veri nedeniyle {city} atlandı.")
-        continue  
-
     print(f"\nŞehir: {city} için model eğitiliyor...")
 
     X = df_city.drop(columns=['price', 'city'])  
