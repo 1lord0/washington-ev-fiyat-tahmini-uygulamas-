@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 
-df = pd.read_csv('model_deploy/data.csv')  # dosya projenin içinde olmalı
+df = pd.read_csv('model_deploy/yenidata1.csv')  # dosya projenin içinde olmalı
 
 
 
