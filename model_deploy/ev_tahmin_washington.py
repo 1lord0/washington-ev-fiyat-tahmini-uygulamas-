@@ -83,7 +83,7 @@ bedrooms = st.sidebar.number_input("Yatak Odası Sayısı", min_value=0, max_val
 bathrooms = st.sidebar.number_input("Banyo Sayısı", min_value=0.0, max_value=10.0, value=2.0, step=0.5)
 sqft_living = st.sidebar.number_input("Yaşam Alanı (sqft)", min_value=100, max_value=10000, value=2000)
 sqft_lot = st.sidebar.number_input("Arsa Alanı (sqft)", min_value=500, max_value=50000, value=5000)
-floors = st.sidebar.number_input("Kat Sayısı", min_value=1, max_value=5, step=0.5)
+floors = st.sidebar.number_input("Kat Sayısı", min_value=1, max_value=5, value=0.5)
 waterfront = st.sidebar.selectbox("Su Kenarı mı?", options=["Hayır", "Evet"])
 # Binary dönüşüm: "Evet" için 1, "Hayır" için 0
 waterfront = 1 if waterfront == "Evet" else 0
