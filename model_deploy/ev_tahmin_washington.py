@@ -108,6 +108,6 @@ if st.sidebar.button("Tahmin Yap"):
 
         # Tahmin yap
         tahmin = model.predict(input_data)
-        st.success(f"{sehir} için tahmini ev fiyatı: {tahmin[0]:.2f} TL")
+        st.success(f"{sehir} için tahmini ev fiyatı: {tahmin[0]:.2f} dolar")
     else:
         st.error(f"{sehir} modeli bulunamadı. Lütfen model dosyasını kontrol edin.")
