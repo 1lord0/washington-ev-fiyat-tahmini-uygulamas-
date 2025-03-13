@@ -19,7 +19,8 @@ best_params_city = {
     'Shoreline': {'alpha': 0.7742636826811278, 'l1_ratio': 0.8888888888888888},
     'Seattle': {'alpha': 0.0001, 'l1_ratio': 1.0},
     'Renton': {'alpha': 0.7742636826811278, 'l1_ratio': 0.1111111111111111},
-    'Woodinville': {'alpha': 10.0, 'l1_ratio': 0.0}
+    'Woodinville': {'alpha': 10.0, 'l1_ratio': 0.0},
+     'Federal Way': {'alpha': 0.05994842503189409, 'l1_ratio': 0.3333333333333333}
 }
 
 # Model dosyalarının kaydedileceği klasörü oluştur (eğer yoksa)
