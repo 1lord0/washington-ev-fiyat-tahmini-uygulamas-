@@ -11,7 +11,7 @@ url="model_deploy/yenidata1.csv"
 df = pd.read_csv(url)
 
 # Sadece belirli şehirleri seç (örneğin: Shoreline, Seattle, Renton, Woodinville)
-allowed_cities = ['Shoreline', 'Seattle', 'Renton', 'Woodinville','Federal Way','kirkland'    ]
+allowed_cities = ['Shoreline', 'Seattle', 'Renton', 'Woodinville','Federal Way','Kirkland'    ]
 df = df[df["city"].isin(allowed_cities)]
 
 # Her şehir için en iyi parametreler (önceden belirlenmiş)
